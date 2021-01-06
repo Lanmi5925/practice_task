@@ -7,6 +7,7 @@ import time
 大体思路为先创建空缓存
 其次遇到已经计算过的值，优先从缓存内读取
 未计算过的值，算完之后存入缓存
+基本可以瞬间算出结果，程序运行速度大大提高
 '''
 def stairs(n, cache=None):
 	if cache is None:
