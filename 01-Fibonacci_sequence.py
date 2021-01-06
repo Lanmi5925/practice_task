@@ -2,6 +2,12 @@
 # 输入一个数字打印出“共xx种方法”和“程序用时xx秒”
 import time
 
+'''
+加入缓存，避免重复计算
+大体思路为先创建空缓存
+其次遇到已经计算过的值，优先从缓存内读取
+未计算过的值，算完之后存入缓存
+'''
 def stairs(n, cache=None):
 	if cache is None:
 		cache = {}
