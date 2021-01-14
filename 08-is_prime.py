@@ -4,37 +4,44 @@
 思路：仍然利用回溯法，将1设为起点，不断尝试，成功即返回一个素数环
 不成功即返回上一层继续尝试
 '''
+import copy
 # 创建一个函数用来判断两数之和是否为素数
 from math import sqrt
+
+
 def isPrime(n):
     if n == 1:
         return False
-    for i in range(2, int(sqrt(n))+1):
+    for i in range(2, int(sqrt(n)) + 1):
         if n % i == 0:
             return False
     return True
 
-def backtrack(k, pList, n):
-	if pList == [] :
-		solve.append(sList)
-		return solve
-	# 首先遍历当前子节点
-	for i in range(2, n+1):
-		
-		k = k + i
-		if isPrime(k):
-			k = i
-			sList.append(i)
-			pList.remove(i)
-			# print(sList)
-			# print(pList)
-			backtrack(k, pList, n)
+
+def notR(i, a):
+    if i in a:
+        return False
+    else:
+        return True
+
+
+def backtrack(pList, a, k, n, solve):
+    if k == n:
+        return solve.append(a)
+
+    for i in pList:
+        if notR(i, a):
+            nsum = i + a[k - 1]
+            if isPrime(nsum):
+                print(i)
+                a[k] = i
+                backtrack(pList, a, k + 1, n, solve)
 
 
 n = 5
-pList = [i for i in range(2, n+1)]
-sList = [1]
+pList = [i for i in range(1, n + 1)]
+a = [0 for i in range(n)]
 solve = []
-# print(pList)
-backtrack(1, pList, n)
-print(len(solve))
+a[0] = 1
+backtrack(pList, a, 1, n, solve)
+print(solve)
